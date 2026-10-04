@@ -1,0 +1,29 @@
+1
+00:00:00,000 --> 00:00:05,000
+Synthetic example:
+the overall rate can hide a reversal.
+
+2
+00:00:05,000 --> 00:00:14,000
+Easy group: B scores 95%,
+versus 90% for A.
+
+3
+00:00:14,000 --> 00:00:23,000
+Hard group: B also leads,
+20% versus 10% for A.
+
+4
+00:00:23,000 --> 00:00:35,000
+Pooled: A 82.7%, B 32.5%.
+A has more easy trials; B has more hard trials.
+
+5
+00:00:35,000 --> 00:00:44,000
+With equal group weights:
+A 50%, B 57.5%.
+
+6
+00:00:44,000 --> 00:00:48,000
+Compare the groups and their weights
+before judging the overall rate.

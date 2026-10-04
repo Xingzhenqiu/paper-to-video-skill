@@ -1,0 +1,18 @@
+Synthetic rates and group weighting
+
+Abstract
+This synthetic example illustrates how pooling groups with different weights can reverse an observed comparison. It is an arithmetic demonstration, not a report of real research.
+
+Methods
+All counts were invented for this demonstration. Define a success rate as successes divided by trials. In the easy group, option A has 90 successes in 100 trials and option B has 19 successes in 20 trials. In the hard group, option A has 1 success in 10 trials and option B has 20 successes in 100 trials. Pool each option by adding its successes and trials. For a standardized comparison, average its two group rates using weights of 0.5 and 0.5.
+
+Results
+In the easy group, the success rates are 90% for A and 95% for B. In the hard group, they are 10% for A and 20% for B. B has the higher observed rate within both groups.
+After pooling, A has 91 successes in 110 trials, approximately 82.7%, while B has 39 successes in 120 trials, or 32.5%. The pooled ordering reverses because A has a larger proportion of easy-group trials and B has a larger proportion of hard-group trials.
+With a common 50:50 weighting of easy and hard groups, the standardized rates are 50% for A and 57.5% for B. These standardized rates describe a common group mixture, not the observed pooled mixtures.
+
+Limitations
+These invented counts establish an arithmetic relationship only. They are not a scientific dataset, treatment comparison, journal article, or causal estimate. There is no DOI. Equal weights are a chosen illustration, not a generally required adjustment; a real analysis needs a justified target population and study design.
+
+Takeaway
+Compare the groups and their weights before judging the overall rate.

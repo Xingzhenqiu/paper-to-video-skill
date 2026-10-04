@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "title": "Synthetic rates and group weighting",
+  "provenance": {
+    "synthetic": true,
+    "label": "Synthetic example",
+    "description": "Original invented counts for an arithmetic demonstration. Not a real paper, experiment, or causal comparison.",
+    "source_file": "article.txt"
+  },
+  "groups": [
+    {
+      "id": "easy",
+      "label": "Easy group",
+      "A": {"successes": 90, "trials": 100},
+      "B": {"successes": 19, "trials": 20}
+    },
+    {
+      "id": "hard",
+      "label": "Hard group",
+      "A": {"successes": 1, "trials": 10},
+      "B": {"successes": 20, "trials": 100}
+    }
+  ],
+  "standardization": {
+    "weights": {"easy": 0.5, "hard": 0.5}
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "synthetic": true,
+  "duration_seconds": 48,
+  "fps": 24,
+  "frames_written": 1152,
+  "width": 1920,
+  "height": 1080,
+  "versions": {
+    "python": "3.12.0",
+    "Pillow": "12.3.0",
+    "imageio_ffmpeg": "0.6.0"
+  },
+  "font": "Pillow built-in scalable font; no external font file",
+  "data_sha256": "8b3f46aa208590f4adc58849d90efe82f060d3fc16a3196d916e25acbeb188d6",
+  "input_checks": "passed",
+  "pooled": {
+    "A": 0.8272727272727273,
+    "B": 0.325
+  },
+  "common_weights": {
+    "easy": 0.5,
+    "hard": 0.5
+  },
+  "standardized": {
+    "A": 0.5,
+    "B": 0.575
+  },
+  "audio": {
+    "present": false,
+    "decoded_duration": null,
+    "timing_basis": "authored_visual_schedule",
+    "word_alignment": "not_performed"
+  },
+  "checks_not_performed": [
+    "independent scientific review",
+    "arbitrary-paper generation",
+    "cross-platform execution",
+    "human assessment of supplied audio"
+  ],
+  "video_sha256": "eed4170bcb0f0d99791f6d2e0c11b45ab8e0877d4d8caedd4f4a3399db32cbea"
+}

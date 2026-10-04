@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "synthetic": true,
+    "label": "Synthetic example",
+    "description": "Quotes refer to the bundled original toy article. Quote matching verifies traceability; it is not independent scientific review."
+  },
+  "source": {
+    "file": "article.txt",
+    "format": "text",
+    "locator_convention": "One-based physical lines, matching scripts/project.py text import."
+  },
+  "timing": {
+    "duration_seconds": 48,
+    "basis": "authored_visual_schedule",
+    "audio_aligned": false
+  },
+  "claims": [
+    {
+      "id": "c_intro",
+      "text": "Different group weights can reverse the pooled ordering in this synthetic example.",
+      "review_status": "pending",
+      "evidence": [{"unit_id": "line_4", "quote": "This synthetic example illustrates how pooling groups with different weights can reverse an observed comparison."}]
+    },
+    {
+      "id": "c_easy",
+      "text": "The easy-group observed rates are A 90% and B 95%.",
+      "review_status": "pending",
+      "evidence": [{"unit_id": "line_10", "quote": "In the easy group, the success rates are 90% for A and 95% for B."}, {"unit_id": "line_7", "quote": "In the easy group, option A has 90 successes in 100 trials and option B has 19 successes in 20 trials."}]
+    },
+    {
+      "id": "c_hard",
+      "text": "The hard-group observed rates are A 10% and B 20%.",
+      "review_status": "pending",
+      "evidence": [{"unit_id": "line_10", "quote": "In the hard group, they are 10% for A and 20% for B."}, {"unit_id": "line_7", "quote": "In the hard group, option A has 1 success in 10 trials and option B has 20 successes in 100 trials."}]
+    },
+    {
+      "id": "c_pooled",
+      "text": "Pooling gives A approximately 82.7% and B 32.5%, reversing the group-level ordering because their group mixtures differ.",
+      "review_status": "pending",
+      "evidence": [{"unit_id": "line_11", "quote": "After pooling, A has 91 successes in 110 trials, approximately 82.7%, while B has 39 successes in 120 trials, or 32.5%."}, {"unit_id": "line_11", "quote": "The pooled ordering reverses because A has a larger proportion of easy-group trials and B has a larger proportion of hard-group trials."}]
+    },
+    {
+      "id": "c_standardized",
+      "text": "A common 50:50 group mixture gives A 50% and B 57.5%; this is a different summary from the observed pooled rates.",
+      "review_status": "pending",
+      "evidence": [{"unit_id": "line_12", "quote": "With a common 50:50 weighting of easy and hard groups, the standardized rates are 50% for A and 57.5% for B."}, {"unit_id": "line_12", "quote": "These standardized rates describe a common group mixture, not the observed pooled mixtures."}]
+    },
+    {
+      "id": "c_takeaway",
+      "text": "Compare the groups and their weights before judging the overall rate.",
+      "review_status": "pending",
+      "evidence": [{"unit_id": "line_18", "quote": "Compare the groups and their weights before judging the overall rate."}]
+    }
+  ],
+  "scenes": [
+    {"id": "s_intro", "start_seconds": 0, "end_seconds": 5, "claim_ids": ["c_intro"], "display_text": "The overall rate can hide a reversal.", "spoken_text": "Synthetic example: the overall rate can hide a reversal.", "visual_intent": "Introduce A and B and clearly label the entire demonstration Synthetic example."},
+    {"id": "s_easy", "start_seconds": 5, "end_seconds": 14, "claim_ids": ["c_easy"], "display_text": "Easy group: A 90%, B 95%.", "spoken_text": "In the easy group, B scores ninety-five percent, versus ninety percent for A.", "visual_intent": "Reveal easy-group denominators and corresponding rates, with B above A."},
+    {"id": "s_hard", "start_seconds": 14, "end_seconds": 23, "claim_ids": ["c_hard"], "display_text": "Hard group: A 10%, B 20%.", "spoken_text": "In the hard group, B also leads: twenty percent, versus ten percent for A.", "visual_intent": "Switch to hard-group counts and rates, preserving option colors and the comparison scale."},
+    {"id": "s_pooled", "start_seconds": 23, "end_seconds": 35, "claim_ids": ["c_pooled"], "display_text": "Pooled: A 82.7%, B 32.5%.", "spoken_text": "Pool the counts, and A appears ahead. A has far more easy trials; B has far more hard trials.", "visual_intent": "Show the observed group weights before revealing pooled rates; never imply a causal advantage."},
+    {"id": "s_standardized", "start_seconds": 35, "end_seconds": 44, "claim_ids": ["c_standardized"], "display_text": "Common 50:50 weights: A 50%, B 57.5%.", "spoken_text": "Give both groups equal weight. The rates become fifty percent for A and fifty-seven point five percent for B.", "visual_intent": "Replace unequal observed group mixtures with explicit equal weights; distinguish this standardized summary from observed pooling."},
+    {"id": "s_takeaway", "start_seconds": 44, "end_seconds": 48, "claim_ids": ["c_takeaway"], "display_text": "Compare the groups and their weights before judging the overall rate.", "spoken_text": "Compare the groups and their weights before judging the overall rate.", "visual_intent": "Finish with one short takeaway and the persistent Synthetic example label."}
+  ]
+}

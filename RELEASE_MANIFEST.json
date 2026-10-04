@@ -1,0 +1,168 @@
+{
+  "version": "0.1.0-alpha",
+  "license_status": "pending_owner_confirmation",
+  "source_file_count": 32,
+  "manifest_hash_excludes_itself": true,
+  "files": [
+    {
+      "path": ".github/workflows/checks.yml",
+      "size": 423,
+      "sha256": "630351227bf4d2df4dfd5a716d307eae4b9b6bbaddf911365a4edd26a6e3d235"
+    },
+    {
+      "path": ".gitignore",
+      "size": 68,
+      "sha256": "32dc6a4a0548658be95a4b42e4a2e164ab0cc3ca07b30cab1aaba34f33c92bcd"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "size": 1054,
+      "sha256": "caded1181dbc499ddb654d41df422f37f049755e6ca340ae385b264b55d665f3"
+    },
+    {
+      "path": "README.md",
+      "size": 6850,
+      "sha256": "655ecddc1c6534592dc32c5e500e653d7900ae8e462c14225382437b9288849a"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "size": 6034,
+      "sha256": "858cf4149f530bca7e5ce55db27ccadd55ea3c8cfb165364de2c540c60f45c17"
+    },
+    {
+      "path": "RIGHTS.md",
+      "size": 1190,
+      "sha256": "7726c9cbf5e14f5f864c70300d258f390d83daf5f1d97dac06a0cd0f8165f7ad"
+    },
+    {
+      "path": "docs/REPRODUCIBILITY.md",
+      "size": 3901,
+      "sha256": "5b373bc06b6bc87ac1a1427aead856e593e721bde80a5d86bec5d44445ba3e59"
+    },
+    {
+      "path": "docs/demo.html",
+      "size": 1680,
+      "sha256": "e4fc11f787d7ba0d23152f0739f5f52ed13112d5c70ba2f19eada0d258351b1c"
+    },
+    {
+      "path": "docs/media/demo.mp4",
+      "size": 1161171,
+      "sha256": "eed4170bcb0f0d99791f6d2e0c11b45ab8e0877d4d8caedd4f4a3399db32cbea"
+    },
+    {
+      "path": "docs/media/demo.report.json",
+      "size": 1039,
+      "sha256": "46f77c5a688bad49ba30012b03d0db61708972598cf5e7c7b1c90aa76cc5be15"
+    },
+    {
+      "path": "docs/media/demo.srt",
+      "size": 532,
+      "sha256": "286a0bdd12c7524aefd4591bff9ec1622fdacb31b88440e0c7110e49214d8d9a"
+    },
+    {
+      "path": "docs/media/poster.png",
+      "size": 169624,
+      "sha256": "bcb2f54505b55c5be92744cbf58618b111864f56b29525799ae7e8ee9051e317"
+    },
+    {
+      "path": "docs/media/subtitles.en.vtt",
+      "size": 540,
+      "sha256": "23f5cdb60f819cc392974346781525c99d1ceab0cc111d55acc9a4bdcd7272f8"
+    },
+    {
+      "path": "examples/simpson/article.txt",
+      "size": 1735,
+      "sha256": "d385e7970ae075f609670ea084cb60d0feea38b666f500231f13c673b7dcfcfb"
+    },
+    {
+      "path": "examples/simpson/data.json",
+      "size": 708,
+      "sha256": "8b3f46aa208590f4adc58849d90efe82f060d3fc16a3196d916e25acbeb188d6"
+    },
+    {
+      "path": "examples/simpson/evidence_map.json",
+      "size": 5165,
+      "sha256": "c2f322e73cd4c7034399cdb3968d86cf6d6d4c2a8848eab668b4072d9a666b31"
+    },
+    {
+      "path": "examples/simpson/narration.en.md",
+      "size": 945,
+      "sha256": "a92183502c8163a0a6a88eb375ca224c7a0eed9f201c6ef1a9907bef7bf63af4"
+    },
+    {
+      "path": "examples/simpson/project.json",
+      "size": 10450,
+      "sha256": "0b4ab23708609d4c6f9393b1bcf64056e95af2cad0daef77b9845ee4987adaaa"
+    },
+    {
+      "path": "examples/simpson/render_demo.py",
+      "size": 17261,
+      "sha256": "c2b7bf3af7b8be7b02c8c24f3b05b77b48a5e122df46b323c3969932806c28ac"
+    },
+    {
+      "path": "examples/simpson/subtitles.en.srt",
+      "size": 532,
+      "sha256": "286a0bdd12c7524aefd4591bff9ec1622fdacb31b88440e0c7110e49214d8d9a"
+    },
+    {
+      "path": "requirements-demo.txt",
+      "size": 42,
+      "sha256": "6524cd9700939d9fc49235e887ea37e74af85de21a921be1878cf22f3939a9be"
+    },
+    {
+      "path": "scripts/verify_package.py",
+      "size": 2371,
+      "sha256": "759b52d5e9d12358fcc47855f8435525be6e88d464304d121dc8fbdaa8ee9e61"
+    },
+    {
+      "path": "skills/paper-to-video/SKILL.md",
+      "size": 5770,
+      "sha256": "6b57a92169ca230a263ea123f1a576d5428973db2fc58fb183918623ccbb81c9"
+    },
+    {
+      "path": "skills/paper-to-video/references/evidence-and-review.md",
+      "size": 3001,
+      "sha256": "4ded9189d09f9c78037b32a23093c77745d897d781058e5fdf215928b06cf282"
+    },
+    {
+      "path": "skills/paper-to-video/references/portability.md",
+      "size": 5224,
+      "sha256": "9fc8a994109cd1743facb1f74d11a8420e80e9be177f8a9d965f46b01a5f8f85"
+    },
+    {
+      "path": "skills/paper-to-video/references/project-interface.md",
+      "size": 4116,
+      "sha256": "29415b47e8312e0f9f654f6d4a1519c4300641a4dbff1f4af7152704aa814db3"
+    },
+    {
+      "path": "skills/paper-to-video/references/release-checks.md",
+      "size": 2046,
+      "sha256": "7488d0ddee997f32db20ac4b17cf4dd38ccc5d389d4d83236bdcae7121946074"
+    },
+    {
+      "path": "skills/paper-to-video/references/visual-and-motion.md",
+      "size": 2529,
+      "sha256": "70461347b1a77be6d3faa565d356e636471d48df787afb298762f434926bbd49"
+    },
+    {
+      "path": "skills/paper-to-video/references/voice-and-delivery.md",
+      "size": 2885,
+      "sha256": "84f6b710dfa8eab7d036d6f1a87b92cdee856d8b4d2b44288dce8ebb7b1efd69"
+    },
+    {
+      "path": "skills/paper-to-video/scripts/project.py",
+      "size": 12627,
+      "sha256": "381c041f5bc58e97f0604c1cefe97a775af5a2aa5b0e5c33d1080341b9d4b920"
+    },
+    {
+      "path": "tests/test_demo.py",
+      "size": 2930,
+      "sha256": "3c675c55813df6e121663551a9c82862e145d8bd4051ffb9647a629288c20783"
+    },
+    {
+      "path": "tests/test_portable_project.py",
+      "size": 6966,
+      "sha256": "98469320d8584a968c0ac6ac6b067e2f62b119ab23d1806ea313c53a6034c2d2"
+    }
+  ]
+}
