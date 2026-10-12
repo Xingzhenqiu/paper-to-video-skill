@@ -2,91 +2,81 @@
 
 [English](README.md) · 简体中文
 
-把科研论文制作成清楚、有层次的动画解说：实质主张对应来源，每个画面围绕一个重点展开。
+**让读者看懂论文的关键实验和机制。** Agent 编排有来源的讲解，本地工具按已审阅分镜生成无声画面预览、字幕和后台证据页。
 
-**v0.1-alpha：** Agent 制作工作流，加一个原创、可复现的短演示。安装 skill 并不等于获得任意 PDF 自动成片的引擎。
+**v0.2-alpha：** 接通分镜执行入口，提供已核验的真实论文无声案例和局部重做。科学内容与视觉效果仍需要人工复查。
 
-[![观看辛普森悖论演示](docs/media/poster.png)](docs/media/demo.mp4)
+[![观看抗原逃逸讲解](docs/media/antigen_escape.poster.png)](docs/media/antigen_escape.mp4)
 
-[观看 48 秒演示](docs/media/demo.mp4) · 下载后可打开[本地预览页](docs/demo.html)。
+[观看无声案例](docs/media/antigen_escape.mp4) · [本地预览](docs/demo.html) · [来源与署名](examples/antigen_escape/README.md)
 
-演示以深色背景和逐步展开的图表解释辛普森悖论。文章和数据均为合成教学材料，不是真实实验结果。成片为 1920×1080、24 fps，画面内含英文字幕；默认无声，也可加入自行授权的音轨。
+案例使用 [Sterner & Sterner 的二零二一年综述](https://www.nature.com/articles/s41408-021-00459-7)中的图 1A 和选定原文，按 CC BY 4.0 署名，结合适配原图与定性动画讲解**抗原逃逸**。它只讲选定片段，不冒充全文解读或疗效比较。公开下载仅含代码和无声演示，默认预览无需声音录制、语音模型或 API Key。
 
-## 包内有什么
+## 先运行案例
 
-| 内容 | 能力范围 |
-|---|---|
-| [Agent skill](skills/paper-to-video/SKILL.md) | 来源复核、主张绑定、讲稿、视觉设计、配音与字幕同步、交付检查。宿主 Agent 使用其实际可用的工具执行。 |
-| [项目接口](skills/paper-to-video/references/project-interface.md) | 导入 UTF-8 文本或已有 Reader 卡，检查来源引文与分镜引用；仅依赖 Python 标准库。 |
-| [可运行短演示](examples/simpson/render_demo.py) | 无需 API Key，在本地渲染随包教学案例。这是该案例的专用绘图器，不是通用论文渲染器。 |
-
-## 安装 skill
-
-将完整的 `skills/paper-to-video` 文件夹，包括参考文档和脚本，复制到宿主支持的技能目录。
-
-在本地 Codex 中，可放入 `<你的项目>/.agents/skills/paper-to-video` 或 `~/.agents/skills/paper-to-video`。如果没有出现，刷新或重启。目录规则见 [OpenAI 官方技能文档](https://learn.chatgpt.com/docs/build-skills)。
-
-仓库发布后，也可请 Codex 的 skill installer 从实际仓库地址安装 `paper-to-video`，技能路径为 `skills/paper-to-video`。请填入真实发布地址；本包没有预设仓库所有者。
-
-安装后可以这样提出请求：
-
-> 使用 paper-to-video skill，为目标读者讲解这篇文章。先检查来源和可用工具，再建立主张与证据对应表，并制作一段视觉小样。时长由内容决定。完整制作前，指出需要人工核对的结论和科学结构。
-
-宿主 Agent 需要文件访问和适合的执行工具。PDF 解析、字体、编码器、模型及 TTS 服务属于独立环境依赖，安装技能不会自动提供这些资源。
-
-README 提供英文和中文两个版本；skill 内的详细指令和参考文档目前主要为中文。
-
-## 运行短演示
-
-使用 Python 3.10+，在下载后的仓库根目录运行。这个案例无需 Agent 或云服务账户。
+下载完整仓库，使用 Python 3.12，在仓库根目录执行：
 
 ```bash
 python -m pip install -r requirements-demo.txt
-python examples/simpson/render_demo.py --output outputs/demo.mp4
+python scripts/pipeline.py doctor
+python scripts/pipeline.py validate examples/antigen_escape/project.json
+python scripts/pipeline.py build examples/antigen_escape/project.json --output-dir outputs/antigen-escape
 ```
 
-依赖为 `Pillow>=10.1,<13` 和 `imageio-ffmpeg>=0.6,<0.7`，后者提供视频编码器。安装依赖可能下载软件包；渲染过程不调用付费 API。运行时间取决于本机性能，尚未独立测试其他操作系统。
+打开 `outputs/antigen-escape/video.mp4`。同目录有 SRT/VTT 字幕、`evidence.html` 和 `build_report.json`。无声预览按分镜设定的阅读与观看时长运行，不固定为五分钟；这是用于视觉检查的计划时长，不是实测语速或逐词对齐结果。已核验的默认输出为 1920×1080、24 fps、41.625 秒，共解码 999 帧；较小的试运行可加 `--width 640 --fps 12`，帧取整会使时长略有变化。
 
-可选：加入已获授权、时长为 48 秒且与案例时间轴匹配的音轨：
+相同命令加 `--resume` 可复用通过哈希核验的未变内容。只修改 `s04` 的 `visual.title` 后恢复运行，再从构建报告核对实际复用了哪些画面片段。需要同时保存两版时，先复制原成片。[局部修改说明](docs/INCREMENTAL.md)列出预期行为与当前验证状态。
+
+安装可能下载软件包；无声默认路径在本地渲染，不调用语音服务。运行时间取决于本机。音频导入和英文合成仍作为代码能力保留，须单独配置并在本地使用；公开下载不含语音文件和有声视频，见 [AUDIO.md](docs/AUDIO.md)。
+
+## 安装 Agent skill
+
+把完整的[技能文件夹](skills/paper-to-video/SKILL.md)放入宿主支持的目录。Codex 可用 `<你的项目>/.agents/skills/paper-to-video` 或 `~/.agents/skills/paper-to-video`，必要时刷新。也可请 skill installer 从[本仓库](https://github.com/Xingzhenqiu/paper-to-video-skill)安装 `skills/paper-to-video` 路径。
+
+技能目录包含流程指令和轻量输入适配器；**渲染工具与案例需要完整仓库**。模型、凭证和 PDF 解析服务不随技能安装。
+
+可以这样提出请求：
+
+> 使用 paper-to-video，为目标读者讲解这篇文章。先核对来源、建立主张与证据对应表，并预览最难的科学结构。片长由内容决定，定位句保留在后台，每景围绕一个重点。明确还需要哪些科学或视觉复查。
+
+## 工具和 Agent 各负责什么
+
+| 环节 | 当前实现 |
+|---|---|
+| 输入 | UTF-8 文本或已核对 Reader 卡；原始 PDF/OCR 需要上游解析。 |
+| 内容 | Agent 编写主张、讲稿和视觉计划；初始化不自动生成或验证这些内容。 |
+| 来源 | 重新读取实际来源，核对哈希、文本单元、引文及原图资产。 |
+| 画面 | 标题、保持比例的原图、已编排节点动画及简单柱图；不支持的组件明确报错。 |
+| 声音 | 公开案例显式使用静音；PCM WAV 导入和英文 Kokoro 合成须单独配置，在本地使用。 |
+| 同步 | 公开预览的字幕和动画使用分镜计划时长；单独配置的本地语音路径按实测片段运行，两者均不是逐词强制对齐。 |
+| 修订 | 只重做变动内容及其依赖，复用核验后的其他片段。 |
+| 复查 | 技术完整性与解码检查，和人工科学、视觉审核分别记录；本地语音使用另需试听。 |
+
+新文章可先初始化：
 
 ```bash
-python examples/simpson/render_demo.py --output outputs/demo-with-audio.mp4 --audio YOUR.wav
+python scripts/pipeline.py init article.txt outputs/my-paper/project.json --format text --article-type experimental
 ```
 
-此选项只添加音轨，不合成语音，也不会自动把任意旁白与字幕对齐。默认字幕使用案例预设时间轴；另附 [SRT](examples/simpson/subtitles.en.srt) 和[讲稿](examples/simpson/narration.en.md)，方便准备匹配的配音。
+再编写并核对记录，见[执行说明](skills/paper-to-video/references/execution.md)和[输入契约](skills/paper-to-video/references/project-interface.md)。全文制作要求全文覆盖，选段必须说明范围。刚初始化的记录尚不能直接成片。
 
-可编辑来源包括 [article.txt](examples/simpson/article.txt)、[data.json](examples/simpson/data.json) 和 [project.json](examples/simpson/project.json)。演示由这些原始数据和绘图规则决定；字体和编码器版本可能改变具体外观及文件字节。
-
-已完成与尚未执行的检查见 [REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md)。可自行运行来源与数据检查：
+## 验证与边界
 
 ```bash
 python -B -m unittest discover -s tests -v
 python -B scripts/verify_package.py
 ```
 
-## 建立单篇项目
+[复现记录](docs/REPRODUCIBILITY.md)记录了 59 项单元测试通过、1080p 成片的完整解码与静音检查，以及独立 Agent 在既有隔离环境中完成的 640px 构建与恢复运行。恢复运行后，14 个缓存文件的内容与修改时间均未变化；这不是真人试用或本轮全新环境安装。构建不自动授予科学批准，发布前仍需对照来源核对结构并观看成片；单独配置的本地语音另需试听。
 
-将已有 UTF-8 文本导入新项目记录，再检查基础契约：
+本版不承诺任意 PDF 自动成片、独立科学审计或优于其他系统。尚未进行同论文对照、跨平台端到端基准或五人试用。旧版[辛普森悖论合成教学案例](examples/simpson/render_demo.py)另行保留。
 
-```bash
-python skills/paper-to-video/scripts/project.py init examples/simpson/article.txt outputs/project.json --format text --article-type theoretical
-python skills/paper-to-video/scripts/project.py validate outputs/project.json
-```
+## 参与改进与许可
 
-输出文件必须尚不存在。初始化只记录来源，不自动生成已核对的主张、分镜或视频。按[项目接口文档](skills/paper-to-video/references/project-interface.md)添加真实引文和审核状态。接口也接受已有 Reader 卡；PDF 仍需先用上游工具解析。
+见 [CONTRIBUTING.md](CONTRIBUTING.md) 中可直接参与的小任务，以及[社区说明](docs/COMMUNITY.md)中的反馈、案例投稿与合作范围。[提交反馈](https://github.com/Xingzhenqiu/paper-to-video-skill/issues/new/choose)无需上传未公开论文或私人声音。案例明确同意后才会收录。
 
-## 能力边界与复查
+可自愿复制的致谢：
 
-当前演示的是随包文本与数据 → 预设动画 → MP4。处理新论文时，宿主 Agent 仍需实现各制作步骤；本包没有统一的任意 PDF 解析器、TTS 适配器、自动对齐服务或通用渲染命令。
+> 本视频使用 Paper to Video Skill 制作：https://github.com/Xingzhenqiu/paper-to-video-skill
 
-`contract_valid` 检查基础数据和引用。`evidence_ready` 结合结构检查与填写的人工审核状态，不代表独立科学审计。项目验证器的 `video_ready` 当前始终为 `false`，因为音频、时间轴、渲染及最终听看检查尚未接入该接口；单独导出演示视频不会改变这一状态。
-
-真实论文需要对照来源核对科学主张与图中结构，并实际听看编码后的成片。片长由材料和实测旁白决定，不固定套用时长。论文、图片和声音各有独立使用权限；私人阅读授权不等于公开分发授权。
-
-## 参与改进
-
-见 [CONTRIBUTING.md](CONTRIBUTING.md)。欢迎提供可复现的安装报告、引用检查失败样例，或其他领域的小型公开案例。请附输入、预期行为、环境和最小复现步骤，只分享有权分发的材料。
-
-## 许可
-
-**License pending author confirmation（许可证待作者确认）。** 当前发布候选包尚未授予开源许可，具体见 [RIGHTS.md](RIGHTS.md)。依赖软件的许可，以及未来论文和声音素材的权利，分别核验。
+不强制公开致谢、加星或添加水印。软件与 skill 使用 [MIT 许可证](LICENSE)，分发时应保留其中的版权与许可声明。论文素材和上游条款分别核对，见 [RIGHTS.md](RIGHTS.md)。

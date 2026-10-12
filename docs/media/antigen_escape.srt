@@ -1,0 +1,28 @@
+1
+00:00:00,000 --> 00:00:04,000
+Why can cancer escape a targeted treatment?
+
+2
+00:00:04,375 --> 00:00:10,375
+Figure 1A contrasts a target-positive cell with a target-negative cell.
+
+3
+00:00:10,750 --> 00:00:15,750
+The CAR binding domain recognises a particular target antigen.
+
+4
+00:00:16,125 --> 00:00:22,125
+Target loss can undermine recognition by a single-target CAR.
+
+5
+00:00:22,500 --> 00:00:26,500
+This resistance mechanism is called antigen escape.
+
+6
+00:00:26,875 --> 00:00:33,875
+Multiple targets are one strategy; relapse prevention is not guaranteed.
+
+7
+00:00:34,250 --> 00:00:41,250
+A qualitative review schematic, not a measured treatment comparison.
+

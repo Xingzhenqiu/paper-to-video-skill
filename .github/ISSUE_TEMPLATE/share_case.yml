@@ -1,0 +1,57 @@
+name: Share a case / 自愿分享案例
+description: Share a rights-cleared public case; showcase inclusion is a separate choice.
+title: "[Case] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. Share only material you have permission to make public.
+        Showcase inclusion is optional and defaults to No. A successful build does not establish scientific accuracy.
+        See [Community](https://github.com/Xingzhenqiu/paper-to-video-skill/blob/main/docs/COMMUNITY.md) for consent scope.
+        中文：自愿公开须有分享权限；公开反馈不等于同意收录，收录默认关闭。
+  - type: textarea
+    id: summary
+    attributes:
+      label: Case summary / 案例概述
+      description: Goal, audience, workflow and what worked or needs improvement. Mark synthetic cases.
+    validations:
+      required: true
+  - type: textarea
+    id: sources-and-checks
+    attributes:
+      label: Sources, rights and checks / 来源、权限与核查
+      description: List source and asset reuse terms, reproduction steps, and completed versus pending scientific, audio and visual checks.
+    validations:
+      required: true
+  - type: textarea
+    id: public-links
+    attributes:
+      label: Public links / 可选公开链接
+      description: Link to a public video, project or source. Do not attach private papers or voice references.
+    validations:
+      required: false
+  - type: checkboxes
+    id: permission-to-share
+    attributes:
+      label: Voluntary public sharing / 自愿公开确认
+      options:
+        - label: I voluntarily make this submission public and confirm I have permission to share all included text, figures, video and voice material.
+          required: true
+  - type: dropdown
+    id: showcase-consent
+    attributes:
+      label: Showcase permission / 案例收录选择
+      description: Choosing No does not affect feedback. Consent covers links, a short summary and your chosen public credit; asset copying or relicensing needs separate permission.
+      options:
+        - "No: feedback only; do not include this case in the showcase."
+        - "Yes: I explicitly allow maintainers to include these public links, a short summary and my chosen credit in the repository showcase."
+      default: 0
+    validations:
+      required: true
+  - type: input
+    id: public-credit
+    attributes:
+      label: Optional public credit / 可选公开署名
+      description: Public name, pseudonym or handle. Leave blank for no named credit; do not provide private contact details.
+    validations:
+      required: false

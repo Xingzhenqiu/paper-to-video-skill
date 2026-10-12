@@ -106,7 +106,7 @@ def create_project(source, fmt, article_type, coverage, language, duration):
         'schema_version': 1,
         'project': {'article_type': article_type, 'language': language, 'target_seconds': duration,
                     'audience': None, 'use': 'private', 'pronunciations': {}},
-        'source': {'id': 'source_1', 'format': fmt, 'sha256': hashlib.sha256(raw).hexdigest(),
+        'source': {'id': 'source_1', 'format': fmt, 'path': source.name, 'sha256': hashlib.sha256(raw).hexdigest(),
                    'coverage': coverage, 'rights': 'unknown', 'metadata': metadata,
                    'units': units, 'figures': figures, 'upstream_issues': upstream_issues,
                    'issue_reviews': []},
@@ -174,7 +174,11 @@ def validate(project):
             require(nonempty(scene['visual_intent']), 'scene needs visual_intent')
         if config['article_type'] == 'unknown':
             pending.append('classify article type')
-        if source['coverage'] != 'full':
+        scope = config.get('scope', 'full_paper')
+        require(scope in ('full_paper', 'focused_excerpt'), 'unsupported project scope')
+        if scope == 'focused_excerpt':
+            require(nonempty(config.get('selected_coverage')), 'focused_excerpt needs selected_coverage description')
+        if source['coverage'] != 'full' and scope != 'focused_excerpt':
             pending.append('limited/unknown source coverage; full-paper production blocked')
         if not claims or not scenes:
             pending.append('prepare evidence-backed claims and scenes')
@@ -206,6 +210,9 @@ def main():
     try:
         if args.command == 'init':
             project = create_project(args.source, args.format, args.article_type, args.coverage, args.language, args.seconds)
+            # Paths belong to the project document, never the invoking shell.
+            import os
+            project['source']['path'] = os.path.relpath(args.source.resolve(), args.output.resolve().parent).replace(os.sep, '/')
             result = validate(project)
             require(result['contract_valid'], str(result['errors']))
             write_new(args.output, project)

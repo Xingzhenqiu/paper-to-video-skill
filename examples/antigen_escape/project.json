@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "project": {
+    "article_type": "review",
+    "language": "en",
+    "target_seconds": null,
+    "audience": "Readers learning how target-antigen loss can cause resistance",
+    "use": "public_attributed_demo",
+    "scope": "focused_excerpt",
+    "selected_coverage": "Figure 1A and selected sentences on target specificity, antigen escape and multiple-target strategy.",
+    "pronunciations": {
+      "2021": "two thousand twenty-one",
+      "CAR": "car",
+      "CAR-T": "car tee"
+    }
+  },
+  "source": {
+    "id": "sterner_2021",
+    "format": "text",
+    "path": "source.txt",
+    "sha256": "0f1b0095baf32368aeec9cd33530c9094965e4b57037e32c351431dea3a989e6",
+    "coverage": "partial",
+    "rights": "CC BY 4.0",
+    "metadata": {
+      "title": "CAR-T cell therapy: current limitations and potential strategies",
+      "authors": [
+        "Sterner RC",
+        "Sterner RM"
+      ],
+      "journal": "Blood Cancer Journal",
+      "year": 2021,
+      "doi": "10.1038/s41408-021-00459-7",
+      "url": "https://www.nature.com/articles/s41408-021-00459-7",
+      "provenance": "provenance.json"
+    },
+    "units": [
+      {
+        "id": "line_1",
+        "text": "CAR-T cell therapy: current limitations and potential strategies",
+        "locator": {
+          "kind": "text",
+          "line": 1
+        }
+      },
+      {
+        "id": "line_2",
+        "text": "Current challenges in CAR-T cell therapy include (A) antigen escape, (B) on-target off-tumor effects, (C) trafficking and infiltration of tumors, (D) the immunosuppressive tumor microenvironment, and (E) CAR-T cell-associated toxicities.",
+        "locator": {
+          "kind": "text",
+          "line": 2
+        }
+      },
+      {
+        "id": "line_3",
+        "text": "The antigen binding domain is the portion of the CAR that confers target antigen specificity.",
+        "locator": {
+          "kind": "text",
+          "line": 3
+        }
+      },
+      {
+        "id": "line_4",
+        "text": "the malignant cells of a significant portion of patients treated with these CAR-T cells display either partial or complete loss of target antigen expression.",
+        "locator": {
+          "kind": "text",
+          "line": 4
+        }
+      },
+      {
+        "id": "line_5",
+        "text": "This phenomenon is known as antigen escape.",
+        "locator": {
+          "kind": "text",
+          "line": 5
+        }
+      },
+      {
+        "id": "line_6",
+        "text": "many strategies are now relying on targeting multiple antigens.",
+        "locator": {
+          "kind": "text",
+          "line": 6
+        }
+      }
+    ],
+    "figures": [
+      {
+        "id": "figure_1",
+        "caption": "Current challenges in CAR-T cell therapy include (A) antigen escape, (B) on-target off-tumor effects, (C) trafficking and infiltration of tumors, (D) the immunosuppressive tumor microenvironment, and (E) CAR-T cell-associated toxicities.",
+        "review_status": "verified"
+      }
+    ],
+    "upstream_issues": [],
+    "issue_reviews": []
+  },
+  "route": [
+    "question",
+    "paper_figure",
+    "mechanism",
+    "limits"
+  ],
+  "claims": [
+    {
+      "id": "c1",
+      "text": "The review illustrates antigen escape in Figure 1 panel A.",
+      "review_status": "verified",
+      "evidence": [
+        {
+          "unit_id": "line_2",
+          "quote": "Current challenges in CAR-T cell therapy include (A) antigen escape, (B) on-target off-tumor effects, (C) trafficking and infiltration of tumors, (D) the immunosuppressive tumor microenvironment, and (E) CAR-T cell-associated toxicities."
+        }
+      ],
+      "review_note": "Editorial check against publisher excerpt and original PDF; no independent specialist sign-off inferred."
+    },
+    {
+      "id": "c2",
+      "text": "The CAR antigen binding domain confers target specificity.",
+      "review_status": "verified",
+      "evidence": [
+        {
+          "unit_id": "line_3",
+          "quote": "The antigen binding domain is the portion of the CAR that confers target antigen specificity."
+        }
+      ],
+      "review_note": "Editorial check against publisher excerpt and original PDF; no independent specialist sign-off inferred."
+    },
+    {
+      "id": "c3",
+      "text": "Partial or complete target-antigen loss is described as antigen escape.",
+      "review_status": "verified",
+      "evidence": [
+        {
+          "unit_id": "line_4",
+          "quote": "the malignant cells of a significant portion of patients treated with these CAR-T cells display either partial or complete loss of target antigen expression."
+        }
+      ],
+      "review_note": "Editorial check against publisher excerpt and original PDF; no independent specialist sign-off inferred."
+    },
+    {
+      "id": "c4",
+      "text": "The review discusses targeting multiple antigens as a strategy.",
+      "review_status": "verified",
+      "evidence": [
+        {
+          "unit_id": "line_6",
+          "quote": "many strategies are now relying on targeting multiple antigens."
+        }
+      ],
+      "review_note": "Editorial check against publisher excerpt and original PDF; no independent specialist sign-off inferred."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s01",
+      "display_text": "Why can cancer escape a targeted treatment?",
+      "spoken_text": "Why can cancer escape a targeted treatment?",
+      "claim_ids": [
+        "c1",
+        "c3"
+      ],
+      "visual": {
+        "kind": "title",
+        "title": "Antigen escape",
+        "subtitle": "A focused paper walkthrough"
+      },
+      "visual_intent": "Antigen escape"
+    },
+    {
+      "id": "s02",
+      "display_text": "Figure 1A contrasts a target-positive cell with a target-negative cell.",
+      "spoken_text": "Figure one A contrasts a target-positive cancer cell with a target-negative cell.",
+      "claim_ids": [
+        "c1"
+      ],
+      "visual": {
+        "kind": "figure",
+        "asset": "panelA_dark",
+        "title": "Start with the paper: Figure 1A"
+      },
+      "visual_intent": "Start with the paper: Figure 1A"
+    },
+    {
+      "id": "s03",
+      "display_text": "The CAR binding domain recognises a particular target antigen.",
+      "spoken_text": "The car binding domain recognises a particular target antigen.",
+      "claim_ids": [
+        "c2"
+      ],
+      "visual": {
+        "kind": "diagram",
+        "title": "Recognition depends on the target",
+        "nodes": [
+          {
+            "id": "car",
+            "x": 0.3,
+            "y": 0.25,
+            "shape": "cell",
+            "label": "CAR-T cell",
+            "color": "#75a7d5",
+            "size": 0.18
+          },
+          {
+            "id": "tumour",
+            "x": 0.7,
+            "y": 0.58,
+            "shape": "cell",
+            "label": "Cancer cell",
+            "color": "#5cc9ce",
+            "size": 0.22
+          },
+          {
+            "id": "target",
+            "x": 0.6,
+            "y": 0.58,
+            "shape": "antigen",
+            "label": "Target antigen",
+            "color": "#aa9ed7",
+            "size": 0.07
+          }
+        ],
+        "edges": [
+          {
+            "source": "car",
+            "target": "target",
+            "label": "Recognition",
+            "color": "#f1c56c"
+          },
+          {
+            "source": "target",
+            "target": "tumour",
+            "color": "#aa9ed7",
+            "arrow": false
+          }
+        ],
+        "events": [
+          {
+            "target": "target",
+            "kind": "reveal",
+            "start": 0.1,
+            "end": 0.3
+          },
+          {
+            "target": "target",
+            "kind": "highlight",
+            "start": 0.35,
+            "end": 0.75
+          }
+        ]
+      },
+      "visual_intent": "Recognition depends on the target"
+    },
+    {
+      "id": "s04",
+      "display_text": "Target loss can undermine recognition by a single-target CAR.",
+      "spoken_text": "If cancer cells lose that target, recognition by a car directed only at it can fail.",
+      "claim_ids": [
+        "c2",
+        "c3"
+      ],
+      "visual": {
+        "kind": "diagram",
+        "title": "Target loss can enable escape",
+        "nodes": [
+          {
+            "id": "car",
+            "x": 0.3,
+            "y": 0.25,
+            "shape": "cell",
+            "label": "CAR-T cell",
+            "color": "#75a7d5",
+            "size": 0.18
+          },
+          {
+            "id": "tumour",
+            "x": 0.7,
+            "y": 0.58,
+            "shape": "cell",
+            "label": "Cancer cell",
+            "color": "#5cc9ce",
+            "size": 0.22
+          },
+          {
+            "id": "target",
+            "x": 0.6,
+            "y": 0.58,
+            "shape": "antigen",
+            "label": "Target antigen",
+            "color": "#aa9ed7",
+            "size": 0.07
+          }
+        ],
+        "edges": [
+          {
+            "source": "target",
+            "target": "tumour",
+            "color": "#aa9ed7",
+            "arrow": false
+          }
+        ],
+        "events": [
+          {
+            "target": "target",
+            "kind": "fade",
+            "start": 0.15,
+            "end": 0.42
+          },
+          {
+            "target": "car",
+            "kind": "move",
+            "start": 0.52,
+            "end": 0.82,
+            "to_x": 0.18,
+            "to_y": 0.25
+          }
+        ]
+      },
+      "visual_intent": "Target loss can enable escape"
+    },
+    {
+      "id": "s05",
+      "display_text": "This resistance mechanism is called antigen escape.",
+      "spoken_text": "This resistance mechanism is called antigen escape.",
+      "claim_ids": [
+        "c3"
+      ],
+      "visual": {
+        "kind": "figure",
+        "asset": "panelA_dark",
+        "title": "Antigen escape"
+      },
+      "visual_intent": "Antigen escape"
+    },
+    {
+      "id": "s06",
+      "display_text": "Multiple targets are one strategy; relapse prevention is not guaranteed.",
+      "spoken_text": "Targeting more than one antigen is one strategy discussed here, not a guarantee against relapse.",
+      "claim_ids": [
+        "c4"
+      ],
+      "visual": {
+        "kind": "diagram",
+        "title": "Explore more than one target",
+        "nodes": [
+          {
+            "id": "tumour",
+            "x": 0.5,
+            "y": 0.5,
+            "shape": "cell",
+            "label": "Cancer cell",
+            "color": "#5cc9ce",
+            "size": 0.24
+          },
+          {
+            "id": "target_a",
+            "x": 0.405,
+            "y": 0.5,
+            "shape": "antigen",
+            "label": "Target A",
+            "color": "#aa9ed7",
+            "size": 0.065
+          },
+          {
+            "id": "target_b",
+            "x": 0.595,
+            "y": 0.5,
+            "shape": "antigen",
+            "label": "Target B",
+            "color": "#f1c56c",
+            "size": 0.065
+          }
+        ],
+        "edges": [
+          {
+            "source": "target_a",
+            "target": "tumour",
+            "color": "#aa9ed7",
+            "arrow": false
+          },
+          {
+            "source": "target_b",
+            "target": "tumour",
+            "color": "#f1c56c",
+            "arrow": false
+          }
+        ],
+        "events": [
+          {
+            "target": "target_a",
+            "kind": "reveal",
+            "start": 0.05,
+            "end": 0.25
+          },
+          {
+            "target": "target_b",
+            "kind": "reveal",
+            "start": 0.3,
+            "end": 0.55
+          }
+        ]
+      },
+      "visual_intent": "Explore more than one target"
+    },
+    {
+      "id": "s07",
+      "display_text": "A qualitative review schematic, not a measured treatment comparison.",
+      "spoken_text": "This is a qualitative schematic from a two thousand twenty-one review, not a measured treatment comparison.",
+      "claim_ids": [
+        "c1"
+      ],
+      "visual": {
+        "kind": "title",
+        "title": "Recognition needs a target",
+        "subtitle": "Sterner & Sterner · Blood Cancer Journal · 2021"
+      },
+      "visual_intent": "Recognition needs a target"
+    }
+  ],
+  "warnings": [
+    "Focused review excerpt. The explanatory diagram is qualitative and not a molecular reconstruction or a quantitative efficacy comparison."
+  ],
+  "acceptance": {
+    "source_review": "verified",
+    "scientific_review": "pending",
+    "audio_review": "pending",
+    "visual_review": "pending",
+    "timing_review": "pending"
+  },
+  "render": {
+    "schema_version": 1,
+    "width": 1920,
+    "fps": 24,
+    "pause_seconds": 0.35,
+    "audio": {
+      "engine": "silence",
+      "durations": {
+        "s01": 4,
+        "s02": 6,
+        "s03": 5,
+        "s04": 6,
+        "s05": 4,
+        "s06": 7,
+        "s07": 7
+      }
+    },
+    "assets": {
+      "figure1": {
+        "path": "assets/figure1.png",
+        "sha256": "ff4ac72c3aa01a492d8ec7f3665f45b29f892158faf3f568b236772a908df906",
+        "rights": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "Sterner RC and Sterner RM (2021), Blood Cancer Journal 11, 69, Figure 1. DOI: 10.1038/s41408-021-00459-7.",
+        "changes": "PDF-rendered figure"
+      },
+      "panelA_dark": {
+        "path": "assets/panelA_dark.png",
+        "sha256": "a92913a281921a93d7bb9501649f9906d96519ea15051261a58557876a7eea31",
+        "rights": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "Sterner RC and Sterner RM (2021), Blood Cancer Journal 11, 69, Figure 1. DOI: 10.1038/s41408-021-00459-7.",
+        "changes": "Panel A cropped; exterior white background removed and neutral text adapted for dark viewing. Chromatic illustration pixels retained."
+      }
+    }
+  }
+}

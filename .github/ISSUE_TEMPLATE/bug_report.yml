@@ -1,0 +1,41 @@
+name: Bug report / 问题反馈
+description: Report a failure with minimal, public-safe information.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. English and Chinese are welcome.
+        Do not upload private papers, credentials or voice references. Remove identifying paths from logs.
+        A public DOI, small shareable excerpt or synthetic example can replace a full paper; an input attachment is not required.
+        中文：只需最小复现信息，不必上传私人论文。
+  - type: textarea
+    id: steps
+    attributes:
+      label: Command or steps / 复现步骤
+      description: Include the repository version or commit if known. Replace private paths with generic ones.
+      placeholder: "I ran the included example with: python scripts/pipeline.py ..."
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and observed result / 预期与实际结果
+      description: Describe the failure and include only the relevant, redacted error message.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment / 运行环境
+      description: Operating system, Python version and relevant package versions; omit device identifiers.
+      placeholder: "OS: ...; Python: ...; packages: ..."
+    validations:
+      required: false
+  - type: textarea
+    id: minimal-source
+    attributes:
+      label: Optional minimal input / 可选最小输入
+      description: Public DOI, excerpt you have permission to share, or synthetic reproduction. You can leave this blank.
+    validations:
+      required: false

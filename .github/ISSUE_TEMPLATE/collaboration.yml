@@ -1,0 +1,42 @@
+name: Collaboration inquiry / 合作咨询
+description: Discuss research-video customization or local deployment and training.
+title: "[Collaboration] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a public scope discussion, not a service order. Do not upload confidential papers, personal contact details, credentials or voice references.
+        Availability, deliverables, any price, confidentiality arrangements and schedule need separate agreement.
+        No response time, SLA, scientific sign-off or already launched paid product is promised.
+        中文：可讨论科研视频定制、本地部署及培训；先说明公开需求，不上传机密材料。
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic / 合作方向
+      options:
+        - Research-video customization / 科研视频定制
+        - Local deployment or workflow training / 本地部署或使用培训
+        - Other scope discussion / 其他范围讨论
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal, audience and desired output / 目标、受众与预期产物
+      description: Use a public-safe summary. No full manuscript or private attachment is required.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Optional constraints / 可选限制条件
+      description: Language, approximate length, local environment or timing expectations. An expectation is not an agreed commitment.
+    validations:
+      required: false
+  - type: input
+    id: public-context
+    attributes:
+      label: Optional public context / 可选公开背景
+      description: Public DOI or project link you have permission to share. Leave blank if none.
+    validations:
+      required: false

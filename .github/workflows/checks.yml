@@ -12,5 +12,195 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+      - run: python -m pip install -r requirements-demo.txt
       - run: python -B -m unittest discover -s tests -v
       - run: python -B scripts/verify_package.py
+      - run: python scripts/pipeline.py doctor
+      - run: python scripts/pipeline.py validate examples/antigen_escape/project.json
+      - run: python scripts/pipeline.py build examples/antigen_escape/project.json --output-dir outputs/ci-demo --width 640 --fps 12
+      - run: python scripts/pipeline.py build examples/antigen_escape/project.json --output-dir outputs/ci-demo --width 640 --fps 12 --resume
+  release:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'Xingzhenqiu/paper-to-video-skill'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: release-v0.2.0-alpha
+      cancel-in-progress: false
+    env:
+      RELEASE_TAG: v0.2.0-alpha
+      RELEASE_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install the public media verification dependencies
+        run: python -m pip install -r requirements-demo.txt
+      - name: Check whether this release already exists
+        id: release_state
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh api --paginate "repos/$GITHUB_REPOSITORY/releases" --jq '.[].tag_name' > "$RUNNER_TEMP/release-tags.txt"
+          if grep -Fxq "$RELEASE_TAG" "$RUNNER_TEMP/release-tags.txt"; then
+            echo "Release $RELEASE_TAG already exists; leaving its tag and assets unchanged."
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            tag_count=$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/$RELEASE_TAG" --jq '[.[] | select(.ref == "refs/tags/v0.2.0-alpha")] | length')
+            if [ "$tag_count" != "0" ]; then
+              echo "::error::Tag $RELEASE_TAG already exists without a release; refusing to publish an unchecked target."
+              exit 1
+            fi
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Package and verify both public downloads
+        if: steps.release_state.outputs.exists == 'false'
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import struct
+          import subprocess
+          import zipfile
+          import imageio_ffmpeg
+
+          root = Path.cwd()
+          tracked = subprocess.check_output(['git', 'ls-files', '-z']).decode('utf-8').split('\0')
+          tracked = sorted(path for path in tracked if path)
+          if not {'LICENSE', 'RELEASE_MANIFEST.json', 'skills/paper-to-video/SKILL.md'}.issubset(tracked):
+              raise SystemExit('License, manifest, and skill entry point must all be tracked')
+          manifest_data = (root / 'RELEASE_MANIFEST.json').read_bytes()
+          manifest = json.loads(manifest_data)
+          if manifest['version'] != '0.2.0-alpha' or manifest['manifest_hash_excludes_itself'] is not True:
+              raise SystemExit('Unexpected release manifest version or self-hash policy')
+          entries = {entry['path']: entry for entry in manifest['files']}
+          expected = set(tracked) - {'RELEASE_MANIFEST.json'}
+          if len(entries) != len(manifest['files']) or set(entries) != expected:
+              raise SystemExit('Manifest must exactly match tracked release files, excluding itself')
+          if manifest['source_file_count'] != len(entries):
+              raise SystemExit('Manifest file count differs from its entries')
+          files = {}
+          for relative in tracked:
+              path = root / relative
+              if not path.resolve().is_relative_to(root) or path.is_symlink() or not path.is_file():
+                  raise SystemExit('Unsupported tracked release file: ' + relative)
+              data = path.read_bytes()
+              if relative != 'RELEASE_MANIFEST.json':
+                  entry = entries[relative]
+                  if entry['size'] != len(data) or entry['sha256'] != hashlib.sha256(data).hexdigest():
+                      raise SystemExit('Manifest hash or size mismatch: ' + relative)
+              files[relative] = data
+          if not files['LICENSE'].decode('utf-8').startswith('MIT License'):
+              raise SystemExit('The reviewed MIT LICENSE is required')
+
+          # Public downloads contain code and silent demonstrations only.
+          audio_suffixes = {
+              '.wav', '.wave', '.mp3', '.mp2', '.flac', '.ogg', '.oga', '.opus',
+              '.m4a', '.m4b', '.m4p', '.aac', '.adts', '.wma', '.aif', '.aiff',
+              '.aifc', '.amr', '.au', '.snd', '.caf', '.ac3', '.dts', '.mka',
+              '.weba', '.pcm', '.ape', '.alac',
+          }
+          video_suffixes = {'.mp4', '.m4v', '.mov', '.mkv', '.webm', '.avi', '.mpeg', '.mpg'}
+          ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+          for relative in tracked:
+              suffix = Path(relative).suffix.lower()
+              if suffix in audio_suffixes:
+                  raise SystemExit('Voice/audio files are excluded from this public release: ' + relative)
+              if suffix not in video_suffixes:
+                  continue
+              path = str(root / relative)
+              video = subprocess.run([ffmpeg, '-hide_banner', '-v', 'error', '-nostdin', '-i', path, '-map', '0:v:0', '-an', '-f', 'null', '-'], capture_output=True)
+              if video.returncode:
+                  raise SystemExit('Public video failed full decode: ' + relative)
+              sound = subprocess.run([ffmpeg, '-hide_banner', '-v', 'error', '-nostdin', '-i', path, '-map', '0:a', '-vn', '-c:a', 'pcm_f64le', '-f', 'f64le', 'pipe:1'], capture_output=True)
+              if sound.returncode:
+                  if 'matches no streams' not in sound.stderr.decode('utf-8', errors='replace'):
+                      raise SystemExit('Cannot verify every public audio stream: ' + relative)
+              elif len(sound.stdout) % 8 or any(sample[0] != 0.0 for sample in struct.iter_unpack('<d', sound.stdout)):
+                  raise SystemExit('Voiced or nonzero audio is excluded from public videos: ' + relative)
+              print(relative, 'fully decoded; silent')
+
+          skill_prefix = 'skills/paper-to-video/'
+          standalone = {relative[len(skill_prefix):]: data for relative, data in files.items() if relative.startswith(skill_prefix)}
+          if 'SKILL.md' not in standalone:
+              raise SystemExit('The standalone skill entry point is missing')
+          standalone['LICENSE'] = files['LICENSE']
+          standalone_manifest = {
+              **manifest,
+              'package': 'standalone-skill',
+              'source_manifest_sha256': hashlib.sha256(manifest_data).hexdigest(),
+              'source_file_count': len(standalone),
+              'files': [
+                  {'path': relative, 'size': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+                  for relative, data in sorted(standalone.items())
+              ],
+          }
+          standalone['RELEASE_MANIFEST.json'] = (json.dumps(standalone_manifest, indent=2) + '\n').encode('utf-8')
+          dist = root / 'dist'
+          dist.mkdir(exist_ok=True)
+          downloads = [
+              (dist / 'paper-to-video-skill-v0.2.0-alpha.zip', 'paper-to-video-skill', files),
+              (dist / 'paper-to-video-standalone-v0.2.0-alpha.zip', 'paper-to-video', standalone),
+          ]
+          for destination, prefix, members in downloads:
+              with zipfile.ZipFile(destination, 'w', zipfile.ZIP_DEFLATED) as archive:
+                  for relative, data in sorted(members.items()):
+                      archive.writestr(prefix + '/' + relative, data)
+              with zipfile.ZipFile(destination) as archive:
+                  expected_members = {prefix + '/' + relative for relative in members}
+                  if archive.testzip() is not None or set(archive.namelist()) != expected_members or len(archive.namelist()) != len(members):
+                      raise SystemExit('ZIP CRC or member-set check failed: ' + destination.name)
+                  for relative, data in members.items():
+                      restored = archive.read(prefix + '/' + relative)
+                      if len(restored) != len(data) or hashlib.sha256(restored).digest() != hashlib.sha256(data).digest():
+                          raise SystemExit('ZIP payload mismatch: ' + relative)
+              print(destination.name, destination.stat().st_size, 'bytes; verified')
+          (dist / 'SHA256SUMS.txt').write_text(
+              ''.join(hashlib.sha256(path.read_bytes()).hexdigest() + '  ' + path.name + '\n' for path, _, _ in downloads),
+              encoding='ascii',
+          )
+          PY
+      - name: Create the new prerelease without replacing previous releases
+        if: steps.release_state.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/release-notes.md" <<'NOTES'
+          v0.2.0-alpha adds a unified init/doctor/validate/build/resume path for reviewed scene plans, deterministic silent previews, captions, evidence pages, and selective scene rebuilding.
+
+          The rights-cleared real-paper excerpt uses adapted source figures and qualitative animation. Its authored scene durations provide reading and viewing time for visual inspection, not measured speech or narration alignment. Public downloads contain code and silent demonstrations; no voice files or voiced videos are included. Optional audio import and synthesis remain separately configured local code paths.
+
+          Local verification passed 59 unit tests and decoded the silent 1080p excerpt at 24 fps: 41.625 seconds and 999 frames. An independent Windows Agent run in an existing isolated environment passed a 640px silent build/resume with all 14 cached payloads unchanged. This is not a new environment installation or a human user trial.
+
+          This release job waits for the current unit suite, source/package checks, and a fresh 640px Linux silent build/resume to pass. Packaging verifies the exact tracked-file manifest, fully decodes public videos, and rejects standalone audio files or any nonzero decoded audio samples. See docs/REPRODUCIBILITY.md for performed versus pending checks; a configured workflow is not evidence of a passing remote run.
+
+          Project software and documentation use the MIT License. Upstream paper, model, and asset terms remain documented in RIGHTS.md. The skill-only ZIP contains instructions and code, its copied root LICENSE and a package-specific RELEASE_MANIFEST.json. The full ZIP also includes LICENSE and its manifest; SHA256SUMS.txt verifies both archives. ZIP metadata can differ between local and CI packaging; compare member payloads and their hashes.
+
+          This alpha accepts reviewed supported scene plans; it does not provide universal arbitrary-PDF production or certify scientific accuracy. Human visual review, scientific sign-off, and broader cross-platform/multilingual testing remain incomplete. Separately configured local speech use also requires listening review.
+
+          Community contributions can start with reproducing the example, a minimal bug report, documentation corrections, or caption/source checks. Case sharing and showcase inclusion require voluntary participation and separate explicit consent. Credits, stars, donations, watermarks, and usage reports are optional. See CONTRIBUTING.md and docs/COMMUNITY.md.
+
+          Published v0.1 remains available and is not replaced.
+          NOTES
+          gh release create "$RELEASE_TAG" \
+            dist/paper-to-video-skill-v0.2.0-alpha.zip \
+            dist/paper-to-video-standalone-v0.2.0-alpha.zip \
+            dist/SHA256SUMS.txt \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$RELEASE_SHA" \
+            --title "v0.2.0-alpha: silent example, MIT license, and community entry points" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" \
+            --prerelease --latest=false
+          released_sha=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')
+          if [ "$released_sha" != "$RELEASE_SHA" ]; then
+            echo "::error::Published tag does not resolve to the tested commit."
+            exit 1
+          fi

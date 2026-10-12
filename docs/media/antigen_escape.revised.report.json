@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "pipeline_version": "0.2.0-alpha",
+  "project_sha256": "512ae1b4084b405e915c65a257d9605cbbf79306e1c424e30d10e12ed6715451",
+  "source_sha256": "0f1b0095baf32368aeec9cd33530c9094965e4b57037e32c351431dea3a989e6",
+  "scope": "focused_excerpt",
+  "selected_coverage": "Figure 1A and selected sentences on target specificity, antigen escape and multiple-target strategy.",
+  "duration_seconds": 41.625,
+  "frames": 999,
+  "width": 1920,
+  "fps": 24,
+  "content_led_timing": true,
+  "audio_mode": "silence",
+  "narration_present": false,
+  "timing_basis": "authored_silent_preview",
+  "automated_checks": {
+    "contract": true,
+    "source": {
+      "sha256": "0f1b0095baf32368aeec9cd33530c9094965e4b57037e32c351431dea3a989e6",
+      "units_checked": 6,
+      "source_format": "text"
+    },
+    "quotes": 4,
+    "assets": {
+      "figure1": {
+        "sha256": "ff4ac72c3aa01a492d8ec7f3665f45b29f892158faf3f568b236772a908df906",
+        "rights": "CC BY 4.0",
+        "attribution": "Sterner RC and Sterner RM (2021), Blood Cancer Journal 11, 69, Figure 1. DOI: 10.1038/s41408-021-00459-7."
+      },
+      "panelA_dark": {
+        "sha256": "a92913a281921a93d7bb9501649f9906d96519ea15051261a58557876a7eea31",
+        "rights": "CC BY 4.0",
+        "attribution": "Sterner RC and Sterner RM (2021), Blood Cancer Journal 11, 69, Figure 1. DOI: 10.1038/s41408-021-00459-7."
+      }
+    },
+    "visual_components": [
+      {
+        "kind": "title",
+        "node_count": 0,
+        "asset": null
+      },
+      {
+        "kind": "figure",
+        "node_count": 0,
+        "asset": "panelA_dark"
+      },
+      {
+        "kind": "diagram",
+        "node_count": 3,
+        "asset": null
+      },
+      {
+        "kind": "diagram",
+        "node_count": 3,
+        "asset": null
+      },
+      {
+        "kind": "figure",
+        "node_count": 0,
+        "asset": "panelA_dark"
+      },
+      {
+        "kind": "diagram",
+        "node_count": 3,
+        "asset": null
+      },
+      {
+        "kind": "title",
+        "node_count": 0,
+        "asset": null
+      }
+    ],
+    "audio_inputs": true,
+    "audiovisual_decode": {
+      "decoded": true,
+      "decoded_frames": 999,
+      "audio_decode": true
+    }
+  },
+  "automated_passed": true,
+  "scientific_guarantee": false,
+  "human_review": {
+    "source_review": "verified",
+    "scientific_review": "pending",
+    "audio_review": "pending",
+    "visual_review": "pending",
+    "timing_review": "pending"
+  },
+  "pending": [
+    "review scientific meaning, comparisons and limitations"
+  ],
+  "cache": {
+    "audio_reused": 7,
+    "clips_reused": 6,
+    "audio_built": 0,
+    "clips_built": 1
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "start_seconds": 0.0,
+      "end_seconds": 4.375,
+      "frames": 105,
+      "audio_duration_seconds": 4.0,
+      "pause_duration_seconds": 0.375,
+      "audio_sha256": "07d5270232673e00361785888c8f0c05851b1bb1d2aa2fd22a6101d03af3a5e7",
+      "clip_sha256": "8e497874dfd4b22ae73466d7a8c7e92daa23298eb8ad2b2a4144a365446a7271",
+      "audio_reused": true,
+      "clip_reused": true
+    },
+    {
+      "id": "s02",
+      "start_seconds": 4.375,
+      "end_seconds": 10.75,
+      "frames": 153,
+      "audio_duration_seconds": 6.0,
+      "pause_duration_seconds": 0.375,
+      "audio_sha256": "a436f0b9472b40ccf24531bd3fa581b96cf01ecc00c183ff87c9f1807b0bef33",
+      "clip_sha256": "2d909c4ffedec9866541fad7a565df6aa06a9cb025fd9d6a1687a515b125dc72",
+      "audio_reused": true,
+      "clip_reused": true
+    },
+    {
+      "id": "s03",
+      "start_seconds": 10.75,
+      "end_seconds": 16.125,
+      "frames": 129,
+      "audio_duration_seconds": 5.0,
+      "pause_duration_seconds": 0.375,
+      "audio_sha256": "942a1c2f04ab04bfc9f3dda5f11a47f32d8069b0db6b70882fef4c0113d2f7ee",
+      "clip_sha256": "23046a49be037f54d9930d4ea4640dfc56fe389fe964a06d8333c2b179e12312",
+      "audio_reused": true,
+      "clip_reused": true
+    },
+    {
+      "id": "s04",
+      "start_seconds": 16.125,
+      "end_seconds": 22.5,
+      "frames": 153,
+      "audio_duration_seconds": 6.0,
+      "pause_duration_seconds": 0.375,
+      "audio_sha256": "a436f0b9472b40ccf24531bd3fa581b96cf01ecc00c183ff87c9f1807b0bef33",
+      "clip_sha256": "ad3dc379f25fc4d1cab9f20be30464fd32c5bb98e7780a7e5fd2232e5eb8d3a3",
+      "audio_reused": true,
+      "clip_reused": false
+    },
+    {
+      "id": "s05",
+      "start_seconds": 22.5,
+      "end_seconds": 26.875,
+      "frames": 105,
+      "audio_duration_seconds": 4.0,
+      "pause_duration_seconds": 0.375,
+      "audio_sha256": "07d5270232673e00361785888c8f0c05851b1bb1d2aa2fd22a6101d03af3a5e7",
+      "clip_sha256": "4ead978ef43380d62539e14466f5fd59ec6c9b82c2bfda33a309065ba05079b3",
+      "audio_reused": true,
+      "clip_reused": true
+    },
+    {
+      "id": "s06",
+      "start_seconds": 26.875,
+      "end_seconds": 34.25,
+      "frames": 177,
+      "audio_duration_seconds": 7.0,
+      "pause_duration_seconds": 0.375,
+      "audio_sha256": "7cad54a4c46772823e20a573b9a2fc8e22c4c74f895df5407a19afa46829a93e",
+      "clip_sha256": "c48f5bbf168f499dec00069440371ff58b379d961a9704ad7c08fc12b74e77e4",
+      "audio_reused": true,
+      "clip_reused": true
+    },
+    {
+      "id": "s07",
+      "start_seconds": 34.25,
+      "end_seconds": 41.625,
+      "frames": 177,
+      "audio_duration_seconds": 7.0,
+      "pause_duration_seconds": 0.375,
+      "audio_sha256": "7cad54a4c46772823e20a573b9a2fc8e22c4c74f895df5407a19afa46829a93e",
+      "clip_sha256": "e4836f36fbfa527b9a285af94013334b798fd381f774d92f74184e8a9cc8b9a6",
+      "audio_reused": true,
+      "clip_reused": true
+    }
+  ],
+  "elapsed_seconds": 14.375,
+  "note": "Silent visual preview with authored durations; no narration or pronunciation review is implied.",
+  "outputs": {
+    "video.mp4": {
+      "sha256": "fb954dfe5b0f8f2f505054a54ae301f6a8034e9caf3c53e0d2f35022975edf59",
+      "bytes": 707253
+    },
+    "subtitles.srt": {
+      "sha256": "530d8856e895613c3b3c08ac221e526b6371ab0e01b6eb87da20d2a441bf9085",
+      "bytes": 694
+    },
+    "subtitles.vtt": {
+      "sha256": "3657ce910af11341986785382bfaf03e528394d9b5a826faa850da774b566b97",
+      "bytes": 683
+    },
+    "evidence.html": {
+      "sha256": "fbbb0cfaf8afd79603364b3e1af5875953c731f160b924ab4ee28963263881af",
+      "bytes": 3079
+    }
+  }
+}

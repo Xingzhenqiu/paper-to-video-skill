@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "audio_mode": "silence",
+  "narration_present": false,
+  "timing_basis": "authored_silent_preview",
+  "duration_seconds": 41.625,
+  "frames": 999,
+  "width": 1920,
+  "fps": 24,
+  "change": {
+    "scene_id": "s04",
+    "field": "visual.title"
+  },
+  "before_cache": {
+    "audio_reused": 0,
+    "clips_reused": 0,
+    "audio_built": 7,
+    "clips_built": 7
+  },
+  "after_cache": {
+    "audio_reused": 7,
+    "clips_reused": 6,
+    "audio_built": 0,
+    "clips_built": 1
+  },
+  "changed_silent_pcm_ids": [],
+  "changed_clip_ids": [
+    "s04"
+  ],
+  "human_review_preserved": true,
+  "before_elapsed_seconds": 86.421,
+  "after_elapsed_seconds": 14.375,
+  "audiovisual_decode": {
+    "decoded": true,
+    "decoded_frames": 999,
+    "audio_decode": true
+  },
+  "note": "A local silent-preview revision; generated zero PCM is not a voice recording or measured speech."
+}

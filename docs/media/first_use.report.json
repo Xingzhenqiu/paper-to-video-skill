@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "test_date": "2026-10-12",
+  "test_kind": "Independent agent reproduction of the silent example in an existing clean environment",
+  "human_user_trial": false,
+  "scope": "Supplied antigen_escape excerpt, authored silent durations, full 640px build and unchanged-input resume.",
+  "environment": {
+    "os": "Windows x64",
+    "python": "3.12.0",
+    "existing_virtual_environment": true,
+    "new_virtual_environment_created": false,
+    "system_site_packages": false,
+    "packages_installed_this_run": 0,
+    "installed_demo_packages": {
+      "Pillow": "12.3.0",
+      "imageio-ffmpeg": "0.6.0"
+    },
+    "private_voice_or_model_used": false,
+    "paid_api_calls": 0,
+    "audit_imported_candidate_pipeline": false
+  },
+  "command_note": "Commands ran in the public repository using the existing isolated Python. Test outputs and raw logs were kept outside the public source.",
+  "commands": [
+    "python -B scripts/pipeline.py doctor",
+    "python -B scripts/pipeline.py validate examples/antigen_escape/project.json",
+    "python -B scripts/pipeline.py build examples/antigen_escape/project.json --output-dir <test-output> --width 640 --fps 12",
+    "python -B scripts/pipeline.py build examples/antigen_escape/project.json --output-dir <test-output> --width 640 --fps 12 --resume"
+  ],
+  "results": {
+    "doctor_exit_code": 0,
+    "validate_exit_code": 0,
+    "validate_build_ready": true,
+    "validate_evidence_ready": false,
+    "build_exit_code": 0,
+    "resume_exit_code": 0,
+    "width": 640,
+    "height": 360,
+    "fps": 12,
+    "scenes": 7,
+    "video_frames": 503,
+    "video_duration_seconds": 41.916666666666664,
+    "audio_mode": "silence",
+    "narration_present": false,
+    "timing_basis": "authored_silent_preview",
+    "first_build_wall_seconds": 13.063,
+    "resume_wall_seconds": 2.234,
+    "first_build_cache": {
+      "audio_reused": 0,
+      "clips_reused": 0,
+      "audio_built": 7,
+      "clips_built": 7
+    },
+    "resume_cache": {
+      "audio_reused": 7,
+      "clips_reused": 7,
+      "audio_built": 0,
+      "clips_built": 0
+    },
+    "video_bytes": 190110,
+    "video_sha256": "74adab552f5d505ca32953876c343f4a727a2cf5d07db500caeda4a64e8deaf0",
+    "project_sha256": "1ca029c627604fe5e7304f7f3d42299d40da67af667e0bc14ccdfb5d4cfe0231",
+    "source_sha256": "0f1b0095baf32368aeec9cd33530c9094965e4b57037e32c351431dea3a989e6"
+  },
+  "independent_checks": {
+    "full_video_decoded": true,
+    "decoded_video_frames": 503,
+    "frames_match_report": true,
+    "full_audio_decoded": true,
+    "audio_stream_present": true,
+    "audio_codec": "AAC",
+    "decoded_audio_sample_rate": 48000,
+    "decoded_audio_samples": 2012160,
+    "decoded_audio_duration_seconds": 41.92,
+    "audio_video_duration_difference_seconds": 0.003333333333337407,
+    "decoded_audio_peak": 0,
+    "all_decoded_audio_samples_zero": true,
+    "cache_files_checked": 14,
+    "cached_payload_hashes_unchanged": true,
+    "cached_payload_mtimes_unchanged": true,
+    "reported_scene_hashes_unchanged": true,
+    "final_video_sha256_unchanged_after_resume": true,
+    "subtitle_cues": 7,
+    "subtitle_cues_do_not_overlap": true,
+    "subtitle_scene_checks": [
+      {
+        "scene": "s01",
+        "index_matches": true,
+        "text_matches_display_text": true,
+        "start_matches_scene_within_1ms": true,
+        "end_matches_authored_duration_within_1ms": true,
+        "positive_duration": true,
+        "inside_scene": true
+      },
+      {
+        "scene": "s02",
+        "index_matches": true,
+        "text_matches_display_text": true,
+        "start_matches_scene_within_1ms": true,
+        "end_matches_authored_duration_within_1ms": true,
+        "positive_duration": true,
+        "inside_scene": true
+      },
+      {
+        "scene": "s03",
+        "index_matches": true,
+        "text_matches_display_text": true,
+        "start_matches_scene_within_1ms": true,
+        "end_matches_authored_duration_within_1ms": true,
+        "positive_duration": true,
+        "inside_scene": true
+      },
+      {
+        "scene": "s04",
+        "index_matches": true,
+        "text_matches_display_text": true,
+        "start_matches_scene_within_1ms": true,
+        "end_matches_authored_duration_within_1ms": true,
+        "positive_duration": true,
+        "inside_scene": true
+      },
+      {
+        "scene": "s05",
+        "index_matches": true,
+        "text_matches_display_text": true,
+        "start_matches_scene_within_1ms": true,
+        "end_matches_authored_duration_within_1ms": true,
+        "positive_duration": true,
+        "inside_scene": true
+      },
+      {
+        "scene": "s06",
+        "index_matches": true,
+        "text_matches_display_text": true,
+        "start_matches_scene_within_1ms": true,
+        "end_matches_authored_duration_within_1ms": true,
+        "positive_duration": true,
+        "inside_scene": true
+      },
+      {
+        "scene": "s07",
+        "index_matches": true,
+        "text_matches_display_text": true,
+        "start_matches_scene_within_1ms": true,
+        "end_matches_authored_duration_within_1ms": true,
+        "positive_duration": true,
+        "inside_scene": true
+      }
+    ],
+    "evidence_claims_checked": 4,
+    "claims_quotes_locators_match_source": true,
+    "evidence_source_sha256_matches": true,
+    "relative_html_media_references_resolve": true,
+    "asset_attribution_present": true,
+    "review_statuses_preserved": true,
+    "public_source_files_checked": 75,
+    "public_source_hashes_unchanged": true
+  },
+  "limitations": [
+    "This is an independent agent mechanical audit, not a human first-time-user trial.",
+    "Only the supplied focused excerpt and silent-preview route were exercised; speech import and synthesis were not tested.",
+    "Timing is based on authored silent durations and frame rounding, not narration or word-level forced alignment.",
+    "Mechanical source checks do not provide scientific or aesthetic sign-off.",
+    "Measured timings apply to this run and are not performance guarantees."
+  ],
+  "human_review": {
+    "source_review": "verified",
+    "scientific_review": "pending",
+    "audio_review": "pending",
+    "visual_review": "pending",
+    "timing_review": "pending"
+  },
+  "test_agent_modified_public_sources": false,
+  "private_logs_and_environment": "Retained separately; excluded from the public release."
+}

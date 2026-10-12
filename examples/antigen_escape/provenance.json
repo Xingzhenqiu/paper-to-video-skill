@@ -1,0 +1,66 @@
+{
+  "article": {
+    "title": "CAR-T cell therapy: current limitations and potential strategies",
+    "authors": [
+      "Sterner RC",
+      "Sterner RM"
+    ],
+    "journal": "Blood Cancer Journal",
+    "year": 2021,
+    "doi": "10.1038/s41408-021-00459-7",
+    "url": "https://www.nature.com/articles/s41408-021-00459-7"
+  },
+  "license": {
+    "name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "verified_on": "2026-10-05",
+    "publisher_statement": "Article adaptation and reproduction allowed with attribution; third-party credit exceptions require separate checks.",
+    "figure_credit_review": "Publisher Figure 1 caption and original PDF figure show no separate exclusion or third-party credit line."
+  },
+  "scope": "Selected review excerpt and Figure 1 panel A; not a complete review, a new experiment or a clinical recommendation.",
+  "source": {
+    "path": "source.txt",
+    "sha256": "0f1b0095baf32368aeec9cd33530c9094965e4b57037e32c351431dea3a989e6",
+    "units": [
+      {
+        "line": 2,
+        "location": "Figure 1 caption; PDF p3"
+      },
+      {
+        "line": 3,
+        "location": "CAR Structure / Antigen binding domain; PDF p3"
+      },
+      {
+        "line": 4,
+        "location": "Limitations / Antigen escape; PDF p5"
+      },
+      {
+        "line": 5,
+        "location": "Limitations / Antigen escape; PDF p5"
+      },
+      {
+        "line": 6,
+        "location": "Limitations / Antigen escape; PDF p5"
+      }
+    ]
+  },
+  "assets": {
+    "figure1": {
+      "path": "assets/figure1.png",
+      "sha256": "ff4ac72c3aa01a492d8ec7f3665f45b29f892158faf3f568b236772a908df906",
+      "rights": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Sterner RC and Sterner RM (2021), Blood Cancer Journal 11, 69, Figure 1. DOI: 10.1038/s41408-021-00459-7.",
+      "changes": "PDF-rendered figure"
+    },
+    "panelA_dark": {
+      "path": "assets/panelA_dark.png",
+      "sha256": "a92913a281921a93d7bb9501649f9906d96519ea15051261a58557876a7eea31",
+      "rights": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Sterner RC and Sterner RM (2021), Blood Cancer Journal 11, 69, Figure 1. DOI: 10.1038/s41408-021-00459-7.",
+      "changes": "Panel A cropped; exterior white background removed and neutral text adapted for dark viewing. Chromatic illustration pixels retained."
+    }
+  },
+  "verification": "Selected text checked against publisher sections and existing PDF. Editorial evidence review; no independent domain-specialist approval inferred."
+}

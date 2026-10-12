@@ -1,0 +1,6 @@
+CAR-T cell therapy: current limitations and potential strategies
+Current challenges in CAR-T cell therapy include (A) antigen escape, (B) on-target off-tumor effects, (C) trafficking and infiltration of tumors, (D) the immunosuppressive tumor microenvironment, and (E) CAR-T cell-associated toxicities.
+The antigen binding domain is the portion of the CAR that confers target antigen specificity.
+the malignant cells of a significant portion of patients treated with these CAR-T cells display either partial or complete loss of target antigen expression.
+This phenomenon is known as antigen escape.
+many strategies are now relying on targeting multiple antigens.
