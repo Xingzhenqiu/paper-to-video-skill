@@ -52,6 +52,58 @@ class RendererTests(unittest.TestCase):
         result=validate_visual(project,{"visual":{"kind":"figure","asset":"a"}})
         self.assertEqual(result["asset"],"a")
 
+    def test_cjk_titles_and_captions_require_explicit_font(self):
+        scenes=[
+            {"visual":{"kind":"title","title":"线粒体"}},
+            {"visual":{"kind":"title","title":"ATP 与能量"}},
+            {"visual":{"kind":"title","title":"ATP","subtitle":"细胞供能"}},
+            {"visual":{"kind":"title","title":"ATP"},"display_text":"细胞供能"},
+            {"visual":{"kind":"title","title":"ATP","caption":"细胞供能"}},
+            {"visual":{"kind":"title","title":"ミトコンドリア"}},
+            {"visual":{"kind":"title","title":"미토콘드리아"}},
+            {"visual":{"kind":"title","title":"\U00020000"}},
+        ]
+        for scene in scenes:
+            with self.subTest(scene=scene), self.assertRaisesRegex(ValueError,"licensed CJK font.*render.font"):
+                validate_visual({},scene)
+
+    def test_cjk_diagram_and_bar_labels_require_font(self):
+        for field in ("nodes","edges"):
+            scene={"visual":{"kind":"diagram","nodes":[
+                {"id":"a","shape":"cell","x":.2,"y":.4},
+                {"id":"b","shape":"cell","x":.8,"y":.4}],
+                "edges":[{"source":"a","target":"b"}]}}
+            scene["visual"][field][0]["label"]="能量"
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError,"render.font"):
+                validate_visual({},scene)
+        scene={"visual":{"kind":"bar_chart","bars":[{"value":.5,"label":"实验组"}]}}
+        with self.assertRaisesRegex(ValueError,"render.font"):
+            validate_visual({},scene)
+
+    def test_cjk_figure_heading_requires_font(self):
+        project={"render":{"assets":{"a":{"path":"fig.png"}}}}
+        scene={"visual":{"kind":"figure","asset":"a","title":"线粒体"}}
+        with self.assertRaisesRegex(ValueError,"render.font"):
+            validate_visual(project,scene)
+
+    def test_english_visible_text_works_with_chinese_project_language(self):
+        project={"project":{"language":"zh-CN"},"source":{"metadata":{"title":"线粒体"}}}
+        scene={"spoken_text":"细胞供能","display_text":"ATP powers cells.",
+               "visual":{"kind":"title","title":"ATP","caption":"未显示的说明"}}
+        self.assertEqual(validate_visual(project,scene)["kind"],"title")
+        scene={"visual":{"kind":"diagram","subtitle":"未显示的副标题",
+                          "nodes":[{"id":"a","shape":"cell","x":.5,"y":.5,"label":"Cell"}]}}
+        self.assertEqual(validate_visual(project,scene)["kind"],"diagram")
+
+    def test_explicit_font_allows_cjk_plan_without_claiming_glyph_coverage(self):
+        scene={"visual":{"kind":"title","title":"线粒体"}}
+        # Grammar validation accepts an explicit choice. File loading and human
+        # preview remain separate; a font path does not prove glyph coverage.
+        for project in ({"render":{"font":"fonts/reviewed-cjk.ttf"}},
+                        {"project":{"render":{"font":"fonts/reviewed-cjk.ttf"}}}):
+            with self.subTest(project=project):
+                self.assertEqual(validate_visual(project,scene)["kind"],"title")
+
 
 if __name__=="__main__":
     unittest.main()

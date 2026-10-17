@@ -579,7 +579,9 @@ def build(project_path, output_dir, width=None, fps=None, resume=False,
 
 
 def doctor():
-    checks = {'python': {'version': sys.version.split()[0], 'supported': sys.version_info >= (3, 10)}}
+    checks = {'python': {'version': sys.version.split()[0],
+                         'supported': sys.version_info[:2] == (3, 12),
+                         'required': '3.12'}}
     for name in ('PIL', 'imageio_ffmpeg'):
         try:
             module = importlib.import_module(name)
