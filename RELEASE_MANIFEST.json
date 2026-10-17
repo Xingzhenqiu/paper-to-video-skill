@@ -1,9 +1,14 @@
 {
-  "version": "0.2.0-alpha",
+  "version": "0.2.1-alpha",
   "license_status": "MIT",
-  "source_file_count": 69,
+  "source_file_count": 72,
   "manifest_hash_excludes_itself": true,
   "files": [
+    {
+      "path": ".gitattributes",
+      "size": 260,
+      "sha256": "dc2737b41a72e449de6e8eb694c8c104b5b37388505739a06ab90157dffc7bc5"
+    },
     {
       "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
       "size": 1699,
@@ -26,8 +31,8 @@
     },
     {
       "path": ".github/workflows/checks.yml",
-      "size": 12943,
-      "sha256": "eeb6e6787fcbe1de0c239d0ea9dd73f83c8b281d5302b52165481a10ba783455"
+      "size": 12117,
+      "sha256": "389418231f1656e6d5e9638a58704680e1c04d338dadb98b332b339dacf89744"
     },
     {
       "path": ".gitignore",
@@ -136,8 +141,8 @@
     },
     {
       "path": "docs/REPRODUCIBILITY.md",
-      "size": 5618,
-      "sha256": "a132472708f4cdb39cf05a83defb5d9b3c5d8f672035391c30c8b67b2c145891"
+      "size": 7909,
+      "sha256": "0f3f683e650d173fe72e544955e3153b2858ee7938c3cafd0d50a3d425ae4113"
     },
     {
       "path": "examples/antigen_escape/assets/figure1.png",
@@ -216,18 +221,18 @@
     },
     {
       "path": "README.md",
-      "size": 6998,
-      "sha256": "f27e0eb3b36674a20cd4594bc181fee4c873dcedb29817e60360ea1dc9713b6d"
+      "size": 9433,
+      "sha256": "de8cf5e5cd530fa09bfb904ef7c922a5651fb622f07a51db4bcfbc6550d89e5d"
     },
     {
       "path": "README.zh-CN.md",
-      "size": 6216,
-      "sha256": "cd69194075dc97e03e0bacd9511c8be4e47e48a8f237c19ee7037252f4fe96e0"
+      "size": 8496,
+      "sha256": "fe2318186f288c9653e697825ebea5339a44d29f2a711d35abc01e06da080ba1"
     },
     {
       "path": "requirements-demo.txt",
-      "size": 42,
-      "sha256": "6524cd9700939d9fc49235e887ea37e74af85de21a921be1878cf22f3939a9be"
+      "size": 37,
+      "sha256": "632ed6a2203d994ab4340c918c2618d0d9b1a278884e8e6c281698acc2680982"
     },
     {
       "path": "requirements-voice.txt",
@@ -242,7 +247,7 @@
     {
       "path": "scripts/p2v/__init__.py",
       "size": 111,
-      "sha256": "a7458f1389b9494b107682c35afd5c574b4461f72dcac30184f5327f977703d7"
+      "sha256": "c3bab14c0d0efe37e429cbb7b1e56bda92d4c1daa2ae7f8b5fead9d497515d40"
     },
     {
       "path": "scripts/p2v/audio.py",
@@ -251,18 +256,23 @@
     },
     {
       "path": "scripts/p2v/pipeline.py",
-      "size": 37193,
-      "sha256": "9a822554899345cf2c7c8cd6fc1394df25894a1eedef3b8e243d501d8f7edf54"
+      "size": 37267,
+      "sha256": "893ef0fb4a674e18c4d0a1bbe80b8b396c714613e79dfcb03806a8dc09f40f11"
     },
     {
       "path": "scripts/p2v/renderer.py",
-      "size": 22264,
-      "sha256": "9f4e83c357d17ed4098156d55ed97982e07e52b406eb6d5c5b66e268522b71d7"
+      "size": 23377,
+      "sha256": "e2d3cac73db162c321fc3c99f514791c3a407780a0848ac28254867296325fd9"
     },
     {
       "path": "scripts/pipeline.py",
       "size": 174,
       "sha256": "4318c1b2833af70298ad7a32893ed25c32ca0dbcb5f20e6e34b5b57ce9da81a7"
+    },
+    {
+      "path": "scripts/smoke_check.py",
+      "size": 16722,
+      "sha256": "9bd5a2d70e3812b774334dd91043956b91c09e27e265348050e8a6c487ebc6c7"
     },
     {
       "path": "scripts/verify_package.py",
@@ -325,6 +335,11 @@
       "sha256": "d95ba1596af1ff109c3738daa9f28f52fb9fdd22b615b7f3ed6f779f9b1dba63"
     },
     {
+      "path": "tests/test_checkout.py",
+      "size": 2116,
+      "sha256": "a096c352cb38d3d4edf8220b511a775a749d442579d8c6fc1a990b8ab519ffee"
+    },
+    {
       "path": "tests/test_demo.py",
       "size": 2930,
       "sha256": "3c675c55813df6e121663551a9c82862e145d8bd4051ffb9647a629288c20783"
@@ -336,8 +351,8 @@
     },
     {
       "path": "tests/test_pipeline.py",
-      "size": 19347,
-      "sha256": "8d4ebe99d611097821a55fa85074b0cebae08858dfe72201852e301a421e8e11"
+      "size": 19998,
+      "sha256": "779b11fd89c6b4a851f164c37867b101f0adab5562daf4c43ed582dfb3e5db6d"
     },
     {
       "path": "tests/test_portable_project.py",
@@ -346,8 +361,8 @@
     },
     {
       "path": "tests/test_renderer.py",
-      "size": 2758,
-      "sha256": "f0f83348420e0acc0e1bf31e7415f9a0e8c24d32839f7fc49d08a9a502bea5a6"
+      "size": 5862,
+      "sha256": "6e5260c3fee192d303154b19c2a88e8c3b0aa5bb3fa0b29968cd2c4ad6bad210"
     }
   ]
 }

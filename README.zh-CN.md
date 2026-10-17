@@ -2,9 +2,11 @@
 
 [English](README.md) · 简体中文
 
+[![Package checks](https://github.com/Xingzhenqiu/paper-to-video-skill/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/Xingzhenqiu/paper-to-video-skill/actions/workflows/checks.yml)
+
 **让读者看懂论文的关键实验和机制。** Agent 编排有来源的讲解，本地工具按已审阅分镜生成无声画面预览、字幕和后台证据页。
 
-**v0.2-alpha：** 接通分镜执行入口，提供已核验的真实论文无声案例和局部重做。科学内容与视觉效果仍需要人工复查。
+**v0.2.1-alpha：** 提供已审阅分镜的执行入口、真实论文无声案例、局部重做与首次运行检查。科学内容与视觉效果仍需要人工复查。
 
 [![观看抗原逃逸讲解](docs/media/antigen_escape.poster.png)](docs/media/antigen_escape.mp4)
 
@@ -14,14 +16,29 @@
 
 ## 先运行案例
 
-下载完整仓库，使用 Python 3.12，在仓库根目录执行：
+下载完整仓库并解压，使用 **64 位 Python 3.12**。首次安装需要联网下载固定版本的两个依赖；默认案例不需要 API Key。请在仓库根目录打开终端。
+
+Windows（无需激活虚拟环境）：
+
+```powershell
+py -3.12 -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements-demo.txt
+.venv\Scripts\python.exe scripts/pipeline.py doctor
+.venv\Scripts\python.exe scripts/pipeline.py validate examples/antigen_escape/project.json
+.venv\Scripts\python.exe scripts/pipeline.py build examples/antigen_escape/project.json --output-dir outputs/antigen-escape
+```
+
+macOS / Linux（需先安装 Python 3.12）：
 
 ```bash
-python -m pip install -r requirements-demo.txt
-python scripts/pipeline.py doctor
-python scripts/pipeline.py validate examples/antigen_escape/project.json
-python scripts/pipeline.py build examples/antigen_escape/project.json --output-dir outputs/antigen-escape
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements-demo.txt
+.venv/bin/python scripts/pipeline.py doctor
+.venv/bin/python scripts/pipeline.py validate examples/antigen_escape/project.json
+.venv/bin/python scripts/pipeline.py build examples/antigen_escape/project.json --output-dir outputs/antigen-escape
 ```
+
+下文的 `python` 均指上述虚拟环境中的解释器。找不到 `py` / `python3.12` 时，请先安装对应版本的 Python；不要将这些终端命令粘贴到 Python 的 `>>>` 提示符中。
 
 打开 `outputs/antigen-escape/video.mp4`。同目录有 SRT/VTT 字幕、`evidence.html` 和 `build_report.json`。无声预览按分镜设定的阅读与观看时长运行，不固定为五分钟；这是用于视觉检查的计划时长，不是实测语速或逐词对齐结果。已核验的默认输出为 1920×1080、24 fps、41.625 秒，共解码 999 帧；较小的试运行可加 `--width 640 --fps 12`，帧取整会使时长略有变化。
 
@@ -65,9 +82,16 @@ python scripts/pipeline.py init article.txt outputs/my-paper/project.json --form
 ```bash
 python -B -m unittest discover -s tests -v
 python -B scripts/verify_package.py
+python scripts/smoke_check.py --output-dir outputs/first-run-check
 ```
 
-[复现记录](docs/REPRODUCIBILITY.md)记录了 59 项单元测试通过、1080p 成片的完整解码与静音检查，以及独立 Agent 在既有隔离环境中完成的 640px 构建与恢复运行。恢复运行后，14 个缓存文件的内容与修改时间均未变化；这不是真人试用或本轮全新环境安装。构建不自动授予科学批准，发布前仍需对照来源核对结构并观看成片；单独配置的本地语音另需试听。
+最后一条会实际生成小尺寸无声视频，核对完整解码、字幕、证据页及缓存，再只修改工作副本中的一个标题验证局部重做。它不改原示例，并拒绝覆盖已有非空目录；重新运行时请选择新的目录。检查报告位于该目录的 `smoke_report.json`。
+
+**制作中文内容前配置字体：** 将有使用许可的中文 `.ttf` 或 `.otf` 放入你的项目目录，例如 `assets/NotoSansSC-Regular.ttf`，并在项目 JSON 的根级 `render` 中设置 `"font": "assets/NotoSansSC-Regular.ttf"`。默认字体仅适合西文；缺少字体时中文画面会在校验阶段报错。配置路径不代表所有字形均已覆盖，仍需查看实际预览。不要把字体拷进公共仓库，除非也核对了再分发许可。
+
+仓库用 `.gitattributes` 关闭自动换行转换，保持来源及历史报告被哈希记录的原始字节。不要通过重写来源哈希跳过失败；旧克隆遇到该错误时，保留自己的修改，另下载最新版完整仓库重试。
+
+[复现记录](docs/REPRODUCIBILITY.md)区分旧版测量和 v0.2.1 的本轮结果：新建 Windows / Python 3.12 环境，66 项测试通过，实际生成及检查无声视频。不改内容时 14 个缓存文件的字节和修改时间不变；只改标题时仅重做 `s04` 画面。工作流在 Windows、Linux、macOS 执行同一验收，徽章链接展示实际结果。这些是技术 Agent / CI 检查，不是真人试用或科学批准。发布前仍需对照来源核对结构并观看成片；单独配置的本地语音另需试听。
 
 本版不承诺任意 PDF 自动成片、独立科学审计或优于其他系统。尚未进行同论文对照、跨平台端到端基准或五人试用。旧版[辛普森悖论合成教学案例](examples/simpson/render_demo.py)另行保留。
 

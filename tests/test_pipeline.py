@@ -351,6 +351,15 @@ class PipelineTests(unittest.TestCase):
             with self.subTest(missing=missing):
                 self.assertFalse(check(**missing)['ok'])
 
+    def test_doctor_python_support_matches_documented_runtime(self):
+        with patch.object(pipeline, '_ffmpeg', side_effect=ValueError('no encoder in this version-only test')):
+            for version, supported in (((3, 10, 14), False), ((3, 11, 9), False),
+                                       ((3, 12, 0), True), ((3, 13, 0), False)):
+                with self.subTest(version=version), patch.object(pipeline.sys, 'version_info', version):
+                    result = pipeline.doctor()['checks']['python']
+                    self.assertEqual(result['supported'], supported)
+                    self.assertEqual(result['required'], '3.12')
+
     def test_output_alias_is_explicit_and_preserves_canonical_destination(self):
         fake_report = {'duration_seconds': 1, 'cache': {}, 'human_review': {}, 'automated_passed': True}
         for flag in ('--output-dir', '--output'):

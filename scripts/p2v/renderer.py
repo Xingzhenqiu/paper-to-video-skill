@@ -11,7 +11,7 @@ import math
 from pathlib import Path
 import re
 
-VERSION = "0.2.0"
+VERSION = "0.2.1"
 BG = "#10151f"
 WHITE = "#eef2f6"
 MUTED = "#aab7c7"
@@ -22,6 +22,7 @@ CONTENT = (120.0, 196.0, 1800.0, 852.0)
 CAPTION = (140.0, 918.0, 1780.0, 1030.0)
 KINDS = {"title", "figure", "diagram", "bar_chart"}
 SHAPES = {"cell", "box", "antigen", "receptor"}
+CJK_TEXT = re.compile(r"[\u1100-\u11ff\u2e80-\u9fff\ua960-\ua97f\uac00-\ud7ff\uf900-\ufaff\ufe30-\ufe4f\uff00-\uffef\U00020000-\U000323af]")
 
 
 def _settings(project):
@@ -147,6 +148,18 @@ def validate_visual(project, scene):
             _color(bar.get("color", TEAL))
             if not isinstance(bar.get("label", ""), str):
                 raise ValueError("Bar labels must be strings.")
+    # The default Pillow font silently draws missing-glyph boxes for CJK.
+    # Check only text this scene actually draws, not narration or source metadata.
+    visible_text = [visual.get("title", ""), scene.get("display_text") or visual.get("caption", "")]
+    if kind == "title":
+        visible_text.append(visual.get("subtitle", ""))
+    elif kind == "diagram":
+        visible_text.extend(item.get("label", "") for item in visual.get("nodes", []))
+        visible_text.extend(item.get("label", "") for item in visual.get("edges", []))
+    elif kind == "bar_chart":
+        visible_text.extend(item.get("label", "") for item in visual.get("bars", []))
+    if not _settings(project).get("font") and any(isinstance(text, str) and CJK_TEXT.search(text) for text in visible_text):
+        raise ValueError("Visible CJK text requires a licensed CJK font inside the project; configure render.font with its relative path. Preview the rendered text to check glyph coverage.")
     return {"kind": kind, "node_count": len(visual.get("nodes", [])), "asset": visual.get("asset")}
 
 

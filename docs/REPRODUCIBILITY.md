@@ -2,7 +2,30 @@
 
 The public package contains code and silent demonstrations. Its default real-paper example uses authored scene durations for visual inspection. It requires a reviewed project plan and does not infer a finished explanation from arbitrary PDF bytes.
 
-## Current validation status
+## v0.2.1 first-run checks — 2026-10-17
+
+A new Windows x64 / Python 3.12.0 virtual environment was created with system packages disabled. Pillow 12.3.0 and imageio-ffmpeg 0.6.0 were installed from the public requirements, without a private runtime, model, credential or voice. The supplied FFmpeg executable came from the new environment. This is an Agent-run installation check, not a human user trial.
+
+| Check | Observed local result |
+|---|---|
+| Unit and checkout regressions | 66 tests passed. A real Git fixture cloned with `core.autocrlf=true` preserved source LF bytes, retained-report CRLF bytes and binary data. |
+| Real silent build | All 503 frames decoded at 640×360 / 12 fps, 41.9166667 seconds. Decoded AAC audio was all zero. |
+| Captions and evidence | All 7 SRT/VTT cues match the timeline and display text; all 4 evidence quotes and locators match the source; four output hashes checked. |
+| Unchanged resume | All 7 audio caches and 7 visual clips retained SHA256, byte size and modification time; final video bytes remained unchanged. |
+| One-title revision | Only `s04.clip` changed. All audio and 6 other clips were reused; captions, evidence and scene timing stayed unchanged. |
+| Original example | Unchanged; the smoke check edits a disposable copy and rejects an existing nonempty output directory. |
+
+Run this same check in your environment:
+
+```bash
+python scripts/smoke_check.py --output-dir outputs/first-run-check
+```
+
+Use the virtual environment interpreter from the README. The output contains `smoke_report.json` and each stage's build report. A configured CI job is not a passed result: check [the actual workflow runs](https://github.com/Xingzhenqiu/paper-to-video-skill/actions/workflows/checks.yml) for the Windows, Linux and macOS / Python 3.12 matrix. Release packaging waits for all matrix checks and validates download payloads separately.
+
+The `.gitattributes` rule preserves exact tracked bytes rather than rewriting retained historical reports. CJK scenes without a supplied font now fail early; a configured font still needs actual glyph/layout inspection. These checks cover the included English silent plan, not every PDF, font, system architecture or speech provider. Scientific and visual human review remain separate.
+
+## Retained v0.2.0 validation — 2026-10-12
 
 The revised silent default passed its current unit suite and the local checks below on 2026-10-12. Media and cache results here come from the current explicit-silence plan, rather than the earlier voiced example. Automated checks do not establish human scientific or visual approval.
 

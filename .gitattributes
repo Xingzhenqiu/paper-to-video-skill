@@ -1,0 +1,11 @@
+# Evidence, retained reports and manifests bind exact tracked bytes.
+# Do not let checkout or staging rewrite either LF or existing CRLF payloads.
+* -text
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.mp4 binary
+*.ttf binary
+*.otf binary
+*.pdf binary
+*.zip binary
